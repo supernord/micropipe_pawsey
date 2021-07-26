@@ -33,6 +33,63 @@ Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed
 
 A tutorial is available on the GitHub page: https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage
 
+**1. Prepare the Nextflow configuration file (nextflow.config)**  
+Use the configuration file to run microPIPE at Pawsey Zeus [here]().
+
+**2. Prepare the samplesheet file (csv)**
+See instructions at the [microPIPE GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. 
+
+**3. Prepare the slurm script**  
+The pipeline will be launched using a Slurm script submitted to Zeus. This script will load the required modules, define the input/output directories and files, and include the nextflow command line with optional parameters. 
+```
+#!/bin/bash
+
+#SBATCH --job-name=micropipe
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --output=s%A.micropipe_guppy3.6.1_gpu_12samples.out
+#SBATCH --error=s%A.micropipe_guppy3.6.1_gpu_12samples.err
+#SBATCH --time=24:00:00
+
+module load nextflow/20.07.1-multi
+module load singularity/3.6.4 
+
+#directory containing the nextflow.config file and the main.nf script
+dir=/scratch/director2172/vmurigneux/micropipe
+cd ${dir}
+datadir=${dir}/Illumina
+out_dir=${dir}/results_3.6.1_gpu
+
+#Run A, B or C depending on whether you are starting with ONT fast5 (A or B) or fastq files (C or D) 
+
+#A) Workflow including basecalling, demultiplexing and assembly
+fast5_dir=${dir}/fast5_pass
+csv=${dir}/test_data/samples_all_basecalling.csv
+nextflow main.nf --gpu true --basecalling  -profile zeus --slurm_account='director2172' --demultiplexing --samplesheet ${csv} --outdir ${out_dir} --fast5 ${fast5_dir} --datadir ${datadir}
+#nextflow main.nf --gpu false --basecalling --guppy_num_callers 16 -profile zeus --slurm_account='director2172' --demultiplexing --samplesheet ${csv} --outdir ${out_dir} --fast5 ${fast5_dir} --datadir ${datadir}
+
+#B) Workflow including basecalling and assembly (skip demultiplexing step)
+#fast5_dir=${dir}/fast5_pass
+#csv=${dir}/test_data/samples_1_basecalling_single_isolate.csv
+#nextflow main.nf --basecalling --samplesheet ${csv} --outdir ${out_dir} --fast5 ${fast5_dir} --datadir ${datadir}
+
+#C) Workflow including demultiplexing and assembly
+#fastq_dir=${dir}/fastq
+#csv=${dir}/test_data/samples_1_basecalling.csv
+#nextflow main.nf --demultiplexing --samplesheet ${csv} --outdir ${out_dir} --fastq ${fastq_dir} --datadir ${datadir}
+
+#D) Assembly workflow (skip basecalling and demultiplexing step)
+#csv=${dir}/test_data/samples_1.csv
+#nextflow main.nf --samplesheet ${csv} --outdir ${out_dir} --datadir ${datadir}
+
+#to restart the pipeline if something failed, use the -resume flag after correcting the issue
+#nextflow main.nf -resume --samplesheet ${csv} --outdir ${out_dir} --datadir ${datadir}
+```
+
+**4. Run the pipeline by submitting a job at Pawsey Zeus**
+```
+sbatch nextflow_batch_template.sh
+```
 ---
 
 # Optimisation required
