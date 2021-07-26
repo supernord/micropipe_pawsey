@@ -1,24 +1,32 @@
-[tool / workflow name] on [system name] @ [infrastructure name]
+microPIPE on Zeus/Topaz @ Pawsey
 ===========
 
 ---
 
 # Accessing tool/workflow
 
+The workflow can be downloaded from the GitHub page https://github.com/BeatsonLab-MicrobialGenomics/micropipe using the command: 
 ```
-How can the workflow be accessed? Manual install, or is it available as a module install, for example?
-
+git clone https://github.com/BeatsonLab-MicrobialGenomics/micropipe.git
+```
 Includes straightforward signing in to *HPC/HTC*
-```
 
 ---
 
 # Installation
 
+* **[Nextflow](https://www.nextflow.io/)**  
+A modified version of Nextflow, capable of submitting jobs to Zeus, Topaz and Magnus, has been installed as a system module and can be accessed with the command:
 ```
-How to install the workflow on the infrastructure specified.
+module load nextflow/20.07.1-multi
 ```
-
+* **[Singularity](https://singularity.lbl.gov/install-linux)**  
+Singularity has been installed as a system module and can be accessed with the command:
+```
+module load singularity/3.6.4 
+```
+* **Guppy** (3.6.1 was the latest working version)   
+Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed to redistribute the Guppy software either in its binary form or packaged form e.g. Docker or Singularity images. Therefore users will have to either install Guppy, provide a container image or start the pipeline from the basecalled fastq files.  See [Usage](#usage) section for instructions. 
 ---
 
 # Quickstart tutorial
