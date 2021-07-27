@@ -1,4 +1,4 @@
-[tool / workflow name]
+microPIPE
 ==============
 Australian BioCommons Documentation Guidelines
 
@@ -18,8 +18,9 @@ General information about the guidelines
 
 ---
 
-# General recommendations for using [tool / workflow name]
+# General recommendations for using microPIPE
 
+It is recommended to run the workflow using the GPU resources: the basecalling step will be performed using the high accuracy mode and the workflow will complete faster than with only CPU resources. 
 ```
 Recommendations on using the workflow: for example, based on data set size, infrastructure suitability.
 ```
@@ -28,10 +29,10 @@ Recommendations on using the workflow: for example, based on data set size, infr
 
 # Resources available here
 
-This repository contains structured documentation for [workflow name], including links to existing repositories and community resources, as well as a description of the optimisations achieved on the following compute systems:
+This repository contains structured documentation for microPIPE, including links to existing repositories and community resources, as well as a description of the optimisations achieved on the following compute systems:
 
-- [system name](infrastructure_optimisation.md)
-- ...
+- [Pawsey Supercomputing Centre](https://pawsey.org.au/) (Perth, Western Australia)
+     - [Zeus/Topaz](./infrastructure_optimisation.md)
 
 ---
 
