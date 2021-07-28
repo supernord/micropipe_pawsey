@@ -34,7 +34,7 @@ Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed
 A tutorial is available on the GitHub page: https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage
 
 **1. Prepare the Nextflow configuration file (nextflow.config)**  
-Use the configuration file to run microPIPE at Pawsey Zeus [here]().
+Use the configuration file to run microPIPE at Pawsey Zeus [here](./nextflow.config).
 
 **2. Prepare the samplesheet file (csv)**  
 See instructions at the microPIPE [GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. Prepare the samplesheet file. 
