@@ -36,8 +36,8 @@ A tutorial is available on the GitHub page: https://github.com/BeatsonLab-Microb
 **1. Prepare the Nextflow configuration file (nextflow.config)**  
 Use the configuration file to run microPIPE at Pawsey Zeus [here]().
 
-**2. Prepare the samplesheet file (csv)**
-See instructions at the [microPIPE GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. 
+**2. Prepare the samplesheet file (csv)**  
+See instructions at the microPIPE [GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. 
 
 **3. Prepare the slurm script**  
 The pipeline will be launched using a Slurm script submitted to Zeus. This script will load the required modules, define the input/output directories and files, and include the nextflow command line with optional parameters. 
@@ -110,8 +110,8 @@ Were any optimisations required that were specific to the HPC / HTC infrastructu
 
 * We used the *E.coli* data from the [microPIPE publication](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-021-07767-z) available from the NCBI SRA [BioProject PRJNA679678](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA679678/) (Oxford Nanopore) and the [BioProject PRJEB2968](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJEB2968) (Illumina). 
 
-* See Nextflow configuration file used here and slurm submission script here. 
-* See Nextflow [HTML execution report](), [trace report]() and [HTML processes execution timeline](). 
+* See Nextflow configuration file used [here](./nextflow.config) and slurm submission script [here](./nextflow_batch_template.sh). 
+* See Nextflow [HTML execution report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.report.html), [trace report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.trace.txt) and [HTML processes execution timeline](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.timeline.html). 
 
 ## Exemplar 2: Assembly of 12 *E.coli* ST131 samples using CPU resources 
 
