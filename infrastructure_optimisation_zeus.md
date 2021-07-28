@@ -37,7 +37,7 @@ A tutorial is available on the GitHub page: https://github.com/BeatsonLab-Microb
 Use the configuration file to run microPIPE at Pawsey Zeus [here]().
 
 **2. Prepare the samplesheet file (csv)**  
-See instructions at the microPIPE [GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. 
+See instructions at the microPIPE [GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. Prepare the samplesheet file. 
 
 **3. Prepare the slurm script**  
 The pipeline will be launched using a Slurm script submitted to Zeus. This script will load the required modules, define the input/output directories and files, and include the nextflow command line with optional parameters. 
