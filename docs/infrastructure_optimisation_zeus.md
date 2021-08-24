@@ -9,8 +9,6 @@ The workflow can be downloaded from the GitHub page https://github.com/BeatsonLa
 ```
 git clone https://github.com/BeatsonLab-MicrobialGenomics/micropipe.git
 ```
-Includes straightforward signing in to *HPC/HTC*
-
 ---
 
 # Installation
@@ -31,7 +29,7 @@ Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed
 
 # Quickstart tutorial
 
-A tutorial is available on the GitHub page: https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage
+A tutorial is available on the GitHub page: https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage. The steps are summarised below including the specific instructions required to run the pipeline at Pawsey Zeus.  
 
 **1. Prepare the Nextflow configuration file (nextflow.config)**  
 Use the configuration file to run microPIPE at Pawsey Zeus [here](./nextflow.config).
@@ -39,8 +37,8 @@ Use the configuration file to run microPIPE at Pawsey Zeus [here](./nextflow.con
 **2. Prepare the samplesheet file (csv)**  
 See instructions at the microPIPE [GitHub page](https://github.com/BeatsonLab-MicrobialGenomics/micropipe#usage), section 2. Prepare the samplesheet file. 
 
-**3. Prepare the slurm script**  
-The pipeline will be launched using a Slurm script submitted to Zeus. This script will load the required modules, define the input/output directories and files, and include the nextflow command line with optional parameters. 
+**3. Prepare the slurm script (e.g. nextflow_batch_template.sh)**  
+The pipeline will be launched using a Slurm script submitted to Zeus. This script will load the required modules, define the input/output directories and files, and include the nextflow command line with optional parameters. Note that the configuration profile definition for the Zeus cluster should be specified when launching the pipeline execution by using the "-profile zeus" command line option, as well as the slurm account allocation by using the "--slurm_account='director2172'" command line option (replace 'director2172' by your account identifier). 
 ```
 #!/bin/bash
 
@@ -71,19 +69,19 @@ nextflow main.nf --gpu true --basecalling  -profile zeus --slurm_account='direct
 #B) Workflow including basecalling and assembly (skip demultiplexing step)
 #fast5_dir=${dir}/fast5_pass
 #csv=${dir}/test_data/samples_1_basecalling_single_isolate.csv
-#nextflow main.nf --basecalling --samplesheet ${csv} --outdir ${out_dir} --fast5 ${fast5_dir} --datadir ${datadir}
+#nextflow main.nf --basecalling --samplesheet ${csv} --outdir ${out_dir} --fast5 ${fast5_dir} --datadir ${datadir} -profile zeus --slurm_account='director2172'
 
 #C) Workflow including demultiplexing and assembly
 #fastq_dir=${dir}/fastq
 #csv=${dir}/test_data/samples_1_basecalling.csv
-#nextflow main.nf --demultiplexing --samplesheet ${csv} --outdir ${out_dir} --fastq ${fastq_dir} --datadir ${datadir}
+#nextflow main.nf --demultiplexing --samplesheet ${csv} --outdir ${out_dir} --fastq ${fastq_dir} --datadir ${datadir} -profile zeus --slurm_account='director2172'
 
 #D) Assembly workflow (skip basecalling and demultiplexing step)
 #csv=${dir}/test_data/samples_1.csv
-#nextflow main.nf --samplesheet ${csv} --outdir ${out_dir} --datadir ${datadir}
+#nextflow main.nf --samplesheet ${csv} --outdir ${out_dir} --datadir ${datadir} -profile zeus --slurm_account='director2172'
 
 #to restart the pipeline if something failed, use the -resume flag after correcting the issue
-#nextflow main.nf -resume --samplesheet ${csv} --outdir ${out_dir} --datadir ${datadir}
+#nextflow main.nf -resume --samplesheet ${csv} --outdir ${out_dir} --datadir ${datadir} -profile zeus --slurm_account='director2172'
 ```
 
 **4. Run the pipeline by submitting a job at Pawsey Zeus**
