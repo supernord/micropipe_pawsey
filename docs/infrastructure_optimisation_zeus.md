@@ -92,9 +92,11 @@ sbatch nextflow_batch_template.sh
 
 # Optimisation required
 
-```
-Were any optimisations required that were specific to the HPC / HTC infrastructure used?
-```
+MicroPIPE was originally developed on a cluster for which the jobs could be submitted to both CPU nodes and a GPU node.  At Pawsey, the CPU and GPU nodes are accessed from different clusters ie Zeus (CPU) and Topaz (GPU). Therefore, a modified version of Nextflow, capable of submitting jobs to Zeus, Topaz and Magnus, has been installed as a system module.  
+* The modified Nextflow module should be loaded prior to running the main nextflow command by using ```module load nextflow/20.07.1-multi```.   
+* The MicroPIPE pipeline will be launched using a Slurm script submitted to Zeus.  
+* As a result, Nextflow will automatically submit the GPU tasks to Topaz and the CPU tasks to Zeus.  
+
 Here is a template script to hack Nextflow for multiple clusters (thanks to [@marcodelapierre](https://github.com/marcodelapierre)):   
 https://github.com/marcodelapierre/toy-gpu-nf/blob/master/extra/install-nextflow-hack-slurm-multi-cluster.sh
 
