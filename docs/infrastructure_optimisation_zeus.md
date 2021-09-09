@@ -95,6 +95,9 @@ sbatch nextflow_batch_template.sh
 ```
 Were any optimisations required that were specific to the HPC / HTC infrastructure used?
 ```
+Here is a template script to hack Nextflow for multiple clusters (thanks to [@marcodelapierre](https://github.com/marcodelapierre)):   
+https://github.com/marcodelapierre/toy-gpu-nf/blob/master/extra/install-nextflow-hack-slurm-multi-cluster.sh
+
 
 ---
 
@@ -105,15 +108,35 @@ Were any optimisations required that were specific to the HPC / HTC infrastructu
 ## Summary
 
 ## Exemplar 1: Assembly of 12 *E.coli* ST131 samples using GPU and CPU resources
-
+You can collect usage metrics from your Canu run using the NCI Gadi optimised workflow using scripts available on the Sydney Informatics Hub, University of Sydney GitHub repository.
 * We used the *E.coli* data from the [microPIPE publication](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-021-07767-z) available from the NCBI SRA [BioProject PRJNA679678](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA679678/) (Oxford Nanopore) and the [BioProject PRJEB2968](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJEB2968) (Illumina). 
 
 * See Nextflow configuration file used [here](./nextflow.config) and slurm submission script [here](./nextflow_batch_template.sh). 
 * See Nextflow [HTML execution report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.report.html), [trace report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.trace.txt) and [HTML processes execution timeline](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.timeline.html). 
 
+* The table below summarised the assembly results for each strain. 
+
+|Strain|Chromosome/plasmid|Size (bps)|Circularised?|
+|-------|:-----:|:-----:|:-----:|
+|S24EC| Chromosome <br> Plasmid A | 5078304 <br> 114708 | Yes <br> Yes |    
+|S34EC| Chromosome <br> Plasmid A <br> Plasmid B | 5050427 <br> 153321 <br> 108135 | Yes <br> Yes <br> Yes |    
+|S37EC| Chromosome <br> Plasmid A <br> Plasmid B | 4981928 <br> 157642 <br> 61072 | Yes <br> Yes <br> Yes |    
+|S39EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D <br> Plasmid E <br> Plasmid F | 5054402 <br> 141007 <br> 94979 <br> 68049 <br> 62085 <br> 2070 <br> 1846 | Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes |    
+|S65EC| Chromosome <br> Plasmid A | 5205011 <br> 147412 | Yes <br> Yes |    
+|S96EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 5069496 <br> 164355 <br> 115965 <br> 14479 <br> 4184 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S97EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 5178868 <br> 166099 <br> 96788 <br> 4092 <br> 3209 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S112EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 5020013 <br> 161028 <br> 68847 <br> 5338 <br> 4136 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S116EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 4989207 <br> 66792 <br> 5263 <br> 4257 <br> 4104 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S129EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D <br> Plasmid E <br> Plasmid F <br> Plasmid G | 5193964 <br> 163681 <br> 93505 <br> 33344 <br> 4087 <br> 2401 <br> 2121 <br> 1571 | Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|EC958| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C | 5126816 <br> 136157 <br> 4145 <br> 1830 | Yes <br> Yes <br> Yes <br> Yes |    
+|HVM2044| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C | 5003288 <br> 142959 <br> 18716 <br> 18345 | Yes <br> Yes <br> Yes <br> Yes |    
+
+
 ## Exemplar 2: Assembly of 12 *E.coli* ST131 samples using CPU resources 
 
-* See Nextflow configuration file used [here]() and slurm submission script [here](). 
+* See Nextflow configuration file used [here](./nextflow.config) and slurm submission script [here](./nextflow_batch_template.sh). 
+
+* See Nextflow [HTML execution report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_cpu.report.html), [trace report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_cpu.trace.txt) and [HTML processes execution timeline](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_cpu.timeline.html). 
 
 ---
 
