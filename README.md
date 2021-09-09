@@ -10,7 +10,7 @@ This repository contains structured documentation for [microPIPE](https://github
 
 # General recommendations for using microPIPE
 
-When using microPIPE to run the Oxford Nanopore data basecalling and demultiplexing, it is recommended to use the GPU resources. As a result, the basecalling step will be performed using the high accuracy mode and the workflow will complete faster than with only CPU resources. 
+When using microPIPE to run the Oxford Nanopore data basecalling and demultiplexing, it is recommended to use the GPU resources. As a result, the basecalling step will be performed using the high accuracy model (instead of the fast model) and the workflow will complete faster than with only the CPU resources. 
 
 * The table below summarised the basecalling run time depending on the resources used. 
 
