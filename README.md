@@ -1,7 +1,29 @@
 microPIPE
 ==============
-Australian BioCommons Documentation Guidelines
 
+This repository contains structured documentation for [microPIPE](https://github.com/BeatsonLab-MicrobialGenomics/micropipe), including links to existing repositories and community resources, as well as a description of the optimisations achieved on the following compute systems:
+
+- [Pawsey Supercomputing Centre](https://pawsey.org.au/) (Perth, Western Australia)
+     - [Zeus/Topaz](./infrastructure_optimisation.md)
+
+---
+
+# General recommendations for using microPIPE
+
+When using microPIPE to run the Oxford Nanopore data basecalling and demultiplexing, it is recommended to use the GPU resources. As a result, the basecalling step will be performed using the high accuracy mode and the workflow will complete faster than with only CPU resources. 
+
+* The table below summarised the basecalling run time depending on the resources used. 
+
+|Resources (Cluster)|Basecalling model|Guppy Configuration file|Run time|
+|-------|:-----:|:-----:|:-----:|
+|GPU (Topaz)| high-accuracy | dna_r9.4.1_450bps_hac.cfg | 10h 17m 17s |    
+|CPU (Zeus)| fast | dna_r9.4.1_450bps_fast.cfg | 3d 19h 21m 31s |    
+ 
+To use GPU resources for basecalling and demultiplexing, use the `--gpu` flag in the main nextflow command:  
+```
+nextflow main.nf --gpu true --basecalling --demultiplexing --samplesheet /path/to/samples.csv --fast5 /path/to/fast5/directory/ --datadir /path/to/datadir/ --outdir /path/to/outdir/
+```
+---
 ```
 ###################################################################################
 ### Delete this section when the first version of the documentation is complete ###
@@ -17,37 +39,3 @@ General information about the guidelines
 ```
 
 ---
-
-# General recommendations for using microPIPE
-
-It is recommended to run the workflow using the GPU resources: the basecalling step will be performed using the high accuracy mode and the workflow will complete faster than with only CPU resources. 
-```
-Recommendations on using the workflow: for example, based on data set size, infrastructure suitability.
-```
-
----
-
-# Resources available here
-
-This repository contains structured documentation for microPIPE, including links to existing repositories and community resources, as well as a description of the optimisations achieved on the following compute systems:
-
-- [Pawsey Supercomputing Centre](https://pawsey.org.au/) (Perth, Western Australia)
-     - [Zeus/Topaz](./infrastructure_optimisation.md)
-
----
-
-# Attributions
-
-The guideline template is supported by the Australian BioCommons via Bioplatforms Australia funding, the Australian Research Data Commons (https://doi.org/10.47486/PL105) and the Queensland Government RICF programme. Bioplatforms Australia and the Australian Research Data Commons are enabled by the National Collaborative Research Infrastructure Strategy (NCRIS).
-
-The BioCommons would also like to acknowledge the contributions of the following individuals and institutions to these documentation guidelines:
-
-- Johan Gustafsson (Australian BioCommons, University of Melbourne) [@supernord](https://github.com/supernord)
-- Brian Davis (National Computational Infrastructure) [@Davisclan](https://github.com/Davisclan)
-- Marco de la Pierre (Pawsey Supercomputing Centre) [@marcodelapierre](https://github.com/marcodelapierre)
-- Audrey Stott (Pawsey Supercomputing Centre) [@audreystott](https://github.com/audreystott)
-- Sarah Beecroft (Pawsey Supercomputing Centre) [@SarahBeecroft](https://github.com/SarahBeecroft)
-- Matthew Downton (National Computational Infrastructure) [@mattdton](https://github.com/mattdton)
-- Richard Edwards (University of New South Wales) [@cabbagesofdoom](https://github.com/cabbagesofdoom)
-
-
