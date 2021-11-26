@@ -31,8 +31,6 @@ To build microPIPE we evaluated the performance of several tools at each step of
 Micropipe has been written in Nextflow and uses Singularity containers. It can use both GPU and CPU resources. 
 
 For more information please see our publication here: https://doi.org/10.1186/s12864-021-07767-z.
-    
-    Table with embedded registry links.
 
 -----
 
@@ -42,22 +40,31 @@ For more information please see our publication here: https://doi.org/10.1186/s1
  <img src="https://github.com/BeatsonLab-MicrobialGenomics/micropipe/blob/main/docs/Fig_workflow.png" alt="Workflow" width="400"/>
  </p>
 
-
 -----
 
 # User guide
 
 ## Quick start guide
 
-    General guide for deployment across multiple infrastructures (distinct from specific infrastructure quick start guide) 
+Infrastructure specific guide for [Zeus @ Pawsey Supercomputing Centre provided here](https://github.com/vmurigneu/micropipe_pawsey/blob/master/docs/infrastructure_optimisation_zeus.md#quickstart-tutorial).
 
 ## Infrastructure usage and recommendations
 
-    + link to installation instructions for each infrastructure 
-    + recommendations
-    
-    Documentation for a specific infrastructure should go into a infrastructure documentation template
-    https://github.com/AustralianBioCommons/doc_guidelines/blob/master/infrastructure_optimisation.md
+### General recommendations for using microPIPE
+
+When using microPIPE to run the Oxford Nanopore data basecalling and demultiplexing, it is recommended to use the GPU resources. As a result, the basecalling step will be performed using the high accuracy model (instead of the fast model) and the workflow will complete faster than with only the CPU resources. 
+
+* The table below summarised the basecalling run time depending on the resources used. 
+
+|Resources (Cluster)|Basecalling model|Guppy Configuration file|Run time|
+|-------|:-----:|:-----:|:-----:|
+|GPU (Topaz)| high-accuracy | dna_r9.4.1_450bps_hac.cfg | 10h 17m 17s |    
+|CPU (Zeus)| fast | dna_r9.4.1_450bps_fast.cfg | 3d 19h 21m 31s |    
+ 
+To use GPU resources for basecalling and demultiplexing, use the `--gpu` flag in the main nextflow command:  
+```
+nextflow main.nf --gpu true --basecalling --demultiplexing --samplesheet /path/to/samples.csv --fast5 /path/to/fast5/directory/ --datadir /path/to/datadir/ --outdir /path/to/outdir/
+```
 
 -----
 
@@ -73,7 +80,39 @@ For more information please see our publication here: https://doi.org/10.1186/s1
 
 # Benchmarking
 
-    Benchmarking for a specific infrastructure should go here: if this document is complicated it should go into a benchmarking template, or be provided elsewhere (e.g. Zenodo). 
+## Summary
+
+### Exemplar 1: Assembly of 12 *E.coli* ST131 samples using GPU and CPU resources
+
+You can collect usage metrics from your Canu run using the NCI Gadi optimised workflow using scripts available on the Sydney Informatics Hub, University of Sydney GitHub repository.
+* We used the *E.coli* data from the [microPIPE publication](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-021-07767-z) available from the NCBI SRA [BioProject PRJNA679678](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA679678/) (Oxford Nanopore) and the [BioProject PRJEB2968](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJEB2968) (Illumina). 
+
+* See Nextflow configuration file used [here](./nextflow.config) and slurm submission script [here](./nextflow_batch_template.sh). 
+* See Nextflow [HTML execution report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.report.html), [trace report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.trace.txt) and [HTML processes execution timeline](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_gpu.timeline.html). 
+
+* The table below summarised the assembly results for each strain. 
+
+|Strain|Chromosome/plasmid|Size (bps)|Circularised?|
+|-------|:-----:|:-----:|:-----:|
+|S24EC| Chromosome <br> Plasmid A | 5078304 <br> 114708 | Yes <br> Yes |    
+|S34EC| Chromosome <br> Plasmid A <br> Plasmid B | 5050427 <br> 153321 <br> 108135 | Yes <br> Yes <br> Yes |    
+|S37EC| Chromosome <br> Plasmid A <br> Plasmid B | 4981928 <br> 157642 <br> 61072 | Yes <br> Yes <br> Yes |    
+|S39EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D <br> Plasmid E <br> Plasmid F | 5054402 <br> 141007 <br> 94979 <br> 68049 <br> 62085 <br> 2070 <br> 1846 | Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes |    
+|S65EC| Chromosome <br> Plasmid A | 5205011 <br> 147412 | Yes <br> Yes |    
+|S96EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 5069496 <br> 164355 <br> 115965 <br> 14479 <br> 4184 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S97EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 5178868 <br> 166099 <br> 96788 <br> 4092 <br> 3209 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S112EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 5020013 <br> 161028 <br> 68847 <br> 5338 <br> 4136 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S116EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D | 4989207 <br> 66792 <br> 5263 <br> 4257 <br> 4104 | Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|S129EC| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C <br> Plasmid D <br> Plasmid E <br> Plasmid F <br> Plasmid G | 5193964 <br> 163681 <br> 93505 <br> 33344 <br> 4087 <br> 2401 <br> 2121 <br> 1571 | Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes <br> Yes |  
+|EC958| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C | 5126816 <br> 136157 <br> 4145 <br> 1830 | Yes <br> Yes <br> Yes <br> Yes |    
+|HVM2044| Chromosome <br> Plasmid A <br> Plasmid B <br> Plasmid C | 5003288 <br> 142959 <br> 18716 <br> 18345 | Yes <br> Yes <br> Yes <br> Yes |    
+
+
+### Exemplar 2: Assembly of 12 *E.coli* ST131 samples using CPU resources 
+
+* See Nextflow configuration file used [here](./nextflow.config) and slurm submission script [here](./nextflow_batch_template.sh). 
+
+* See Nextflow [HTML execution report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_cpu.report.html), [trace report](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_cpu.trace.txt) and [HTML processes execution timeline](./micropipe_ecoli_ST131_pawsey_guppy3.6.1_cpu.timeline.html). 
 
 -----
 
@@ -146,8 +185,6 @@ Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed
 
 # Help / FAQ / Troubleshooting
 
-can be found
-
 -----
 
 # 3rd party Tutorials
@@ -161,7 +198,14 @@ can be found
 
 # Acknowledgements / citations / credits
 
-    Any attribution information that is relevant to the workflow being documented.
+## Citations
+
+- Murigneux, V., Roberts, L.W., Forde, B.M. et al. MicroPIPE: validating an end-to-end workflow for high-quality complete bacterial genome construction. BMC Genomics 22, 474 (2021). [https://doi.org/10.1186/s12864-021-07767-z](https://doi.org/10.1186/s12864-021-07767-z)
+- Murigneux, V. (2021). microPIPE: a pipeline for high-quality bacterial genome construction using ONT and Illumina sequencing. WorkflowHub. [https://doi.org/10.48546/WORKFLOWHUB.WORKFLOW.140.1](https://doi.org/10.48546/WORKFLOWHUB.WORKFLOW.140.1)
+
+# Acknowledgements
+
+This work is supported by the Australian BioCommons via funding from Bioplatforms Australia, the Australian Research Data Commons (https://doi.org/10.47486/PL105) and the Queensland Government RICF programme. Bioplatforms Australia and the Australian Research Data Commons are funded by the National Collaborative Research Infrastructure Strategy (NCRIS).
 
 -----
 
