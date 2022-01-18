@@ -144,7 +144,9 @@ You can collect usage metrics from your Canu run using the NCI Gadi optimised wo
 
 # Acknowledgements / citations / credits
 
+- The deployment of the workflow at the Pawsey Supercomputing Centre was supported by the Australian BioCommons via funding from Bioplatforms Australia, the Australian Research Data Commons (https://doi.org/10.47486/PL105) and the Queensland Government RICF programme. Bioplatforms Australia and the Australian Research Data Commons are funded by the National Collaborative Research Infrastructure Strategy (NCRIS).
 - Marco de la Pierre (Pawsey Supercomputing Centre) [@marcodelapierre](https://github.com/marcodelapierre)
+- Johan Gustafsson (Australian BioCommons) [@supernord](https://github.com/supernord)
 ```
 Any attribution information that is relevant to the workflow being documented, or the infrastructure being used.
 ```
