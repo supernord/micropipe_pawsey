@@ -65,7 +65,7 @@ The diagram below summarises the different steps of the pipeline (with each sele
 
 `nextflow main.nf --samplesheet /path/to/samples.csv --fastq /path/to/fastq/directory/ --datadir /path/to/datadir/ --outdir /path/to/outdir/`
 
-Infrastructure specific guide for [Zeus @ Pawsey Supercomputing Centre provided here](https://github.com/vmurigneu/micropipe_pawsey/blob/master/docs/infrastructure_optimisation_zeus.md#quickstart-tutorial).
+Infrastructure specific guide for Zeus @ [Pawsey Supercomputing Centre](https://pawsey.org.au/) provided [here](https://github.com/vmurigneu/micropipe_pawsey/blob/master/docs/infrastructure_optimisation_zeus.md#quickstart-tutorial).
 
 ## Step by step user guide
 
@@ -369,13 +369,6 @@ To test the assembly-only pipeline, edit the `sample_1.csv` samplesheet to point
 ### General recommendations for using microPIPE
 
 When using microPIPE to run the Oxford Nanopore data basecalling and demultiplexing, it is recommended to use the GPU resources. As a result, the basecalling step will be performed using the high accuracy model (instead of the fast model) and the workflow will complete faster than with only the CPU resources. 
-
-* The table below summarised the basecalling run time depending on the resources used at the Pawsey Supercomputing Centre. 
-
-|Resources (Cluster)|Basecalling model|Guppy Configuration file|Run time|
-|-------|:-----:|:-----:|:-----:|
-|GPU (Pawsey Topaz)| high-accuracy | dna_r9.4.1_450bps_hac.cfg | 10h 17m 17s |    
-|CPU (Pawsey Zeus)| fast | dna_r9.4.1_450bps_fast.cfg | 3d 19h 21m 31s |    
  
 To use GPU resources for basecalling and demultiplexing, use the `--gpu` flag in the main nextflow command:  
 ```
@@ -386,11 +379,12 @@ nextflow main.nf --gpu true --basecalling --demultiplexing --samplesheet /path/t
 
 ## Compute resource usage across tested infrastructures
 
-    Table with high level compute resource usage information for standalone runs or testing of specific versions on specific computational infrastructures.
+The table below summarised the basecalling run time depending on the resources used at the Pawsey Supercomputing Centre. 
 
-| Title | Version | Sample description | Wall time | Cores | Peak RAM in GB (requested) | Drive (GB) | HPC-HTC | If HPC-HTC is other, specify | Scheduler | Year-Month |
-| ----- | ------- | ------------------ | --------- | ----- | -------------------------- | ---------- | ------- | ---------------------------- | --------- | ---------- |
-|       |         |                    |           |       |                            |            |         |                              |           |            |
+|Resources (Cluster)|Basecalling model|Guppy Configuration file|Run time|
+|-------|:-----:|:-----:|:-----:|
+|GPU (Pawsey Topaz)| high-accuracy | dna_r9.4.1_450bps_hac.cfg | 10h 17m 17s |    
+|CPU (Pawsey Zeus)| fast | dna_r9.4.1_450bps_fast.cfg | 3d 19h 21m 31s |    
 
 -----
 
