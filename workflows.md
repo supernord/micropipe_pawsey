@@ -505,19 +505,15 @@ Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed
 
     Enabling GPU resource for Racon and Medaka processes.
 
+-----
+
+# Help / FAQ / Troubleshooting
 * In versions greater than Guppy v4.5.2, the default Guppy parameters have changed. If you wish to use Guppy > v4.5.2, please modify the `nexflow.config` to run Guppy with the "--disable_qscore_filtering" flag: 
 ``` 
 params {
         guppy_basecaller_args = "--recursive --trim_barcodes -q 0 --disable_qscore_filtering"
 }
 ```
------
-
-# Help / FAQ / Troubleshooting
-
------
-
-# 3rd party Tutorials
 
 -----
 
