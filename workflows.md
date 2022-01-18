@@ -69,7 +69,35 @@ Infrastructure specific guide for [Zeus @ Pawsey Supercomputing Centre provided 
 
 ## Step by step user guide
 
-**1. Prepare the Nextflow configuration file**
+**0. Requirements**
+
+microPIPE has been built using Nextflow and Singularity to enable ease of use and installation across different platforms.
+
+* [Nextflow](https://www.nextflow.io/) >= 20.10.0
+
+Nextflow can be used on any POSIX compatible system (Linux, OS X, etc). It requires Bash 3.2 (or later) and Java 8 (or later, up to 15) to be installed.
+
+To install Nextflow, run the command:
+
+`wget -qO- https://get.nextflow.io | bash` or `curl -s https://get.nextflow.io | bash`
+
+It will create the nextflow main executable file in the current directory. Optionally, move the nextflow file to a directory accessible by your $PATH variable. 
+
+* [Singularity](https://singularity.lbl.gov/install-linux) >= 2.3 (microPIPE has been tested with version 3.4.1, 3.5.0 and 3.6.3)
+
+* Guppy (4.4.1 was the latest working version)
+ 
+Due to the Oxford Nanopore Technologies terms and conditions, we are not allowed to redistribute the Guppy software either in its binary form or packaged form e.g. Docker or Singularity images. Therefore users will have to either install Guppy, provide a container image or start the pipeline from the basecalled fastq files. 
+
+**1. Installing microPIPE**
+
+Download the microPIPE repository using the command:
+``` 
+git clone https://github.com/BeatsonLab-MicrobialGenomics/micropipe.git
+```
+microPIPE requires the files `main.nf`, `nexflow.config` and a samplesheet file to run.
+
+**2. Prepare the Nextflow configuration file**
 
 When a Nexflow pipeline script is launched, Nextflow looks for a file named **nextflow.config** in the current directory. The configuration file defines default parameters values for the pipeline and cluster settings such as the executor (e.g. "slurm", "local") and queues to be used (https://www.nextflow.io/docs/latest/config.html). 
 
@@ -118,9 +146,9 @@ The **nextflow.config** file should be modified to specify the location of Guppy
 
 An example configuration file can be found in this [repository](https://github.com/BeatsonLab-MicrobialGenomics/micropipe/blob/main/nextflow.config). 
 
-Two versions of the configuration file are available and correspond to microPIPE v0.8 (utilizing Guppy v3.4.3) and v0.9 (utilizing Guppy v3.6.1), as referenced in the paper.  
+Two versions of the configuration file are available and correspond to microPIPE v0.8 (utilizing Guppy v3.4.3) and v0.9 (utilizing Guppy v3.6.1), as referenced in the [paper](https://doi.org/10.1186/s12864-021-07767-z). 
 
-**2. Prepare the samplesheet file (csv)**
+**3. Prepare the samplesheet file (csv)**
 
 The samplesheet file (comma-separated values) defines the input fastq files (Illumina [short] and Nanopore [long], and their directory path), barcode number, sample ID, and the estimated genome size (for Flye assembly). The header line should match the header line in the examples below:
 
@@ -155,7 +183,7 @@ barcode01,S24,barcode01.fastq.gz,5.5m
 barcode02,S34,barcode02.fastq.gz,5.5m
 ```
 
-**3. Run the pipeline**
+**4. Run the pipeline**
 
 The pipeline can be used to run:
 
