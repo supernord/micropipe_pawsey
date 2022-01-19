@@ -17,12 +17,9 @@ microPIPE: a pipeline for high-quality bacterial genome construction using ONT a
   - [Workflow summaries](#workflow-summaries)
       - [Metadata](#metadata)
       - [Component tools](#component-tools)
-      - [Required (minimum)
-        inputs/parameters](#required-minimum-inputsparameters)
       - [Third party tools /dependencies](#third-party-toolsdependencies)
   - [Additional notes](#additional-notes)
   - [Help/FAQ/Troubleshooting](#helpfaqtroubleshooting)
-  - [3rd party Tutorials](#3rd-party-tutorials)
   - [Licence(s)](#licences)
   - [Acknowledgements/citations/credits](#acknowledgementscitationscredits)
 
